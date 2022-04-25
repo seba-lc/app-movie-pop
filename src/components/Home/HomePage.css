@@ -1,0 +1,8 @@
+.homePage-style{
+  min-height: calc(100vh - 60px);
+  width: 100vw;
+  transition: width 300ms;
+  padding-top: 60px !important;
+}
+
+

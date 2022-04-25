@@ -1,0 +1,1 @@
+export const ERROR_USERS = 'ERROR_USERS';

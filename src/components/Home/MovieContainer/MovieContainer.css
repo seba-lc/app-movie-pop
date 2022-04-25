@@ -1,0 +1,18 @@
+.movieContainer-style{
+  height: 100%;
+  width: 550px;
+  position: fixed;
+  right: -100%;
+  transition: right 300ms;
+  z-index: 100;
+}
+
+.movieContainer_show{
+  right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .movieContainer-style{
+    width: 100vw;
+  }
+}

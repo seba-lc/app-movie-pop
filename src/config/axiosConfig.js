@@ -7,5 +7,5 @@ export const axiosBackendClient = axios.create({
 });
 
 export const axiosMovieClient = axios.create({
-  baseURL: "http://api.tvmaze.com/search/shows?q=star%20wars"
+  baseURL: "https://api.tvmaze.com/search/shows?q="
 });
