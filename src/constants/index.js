@@ -1,1 +1,1 @@
-export const URL_BACK = "http://localhost:4000/" /*COMPLETAR*/
+export const URL_BACK = "http://localhost:4000/api/moviepop";

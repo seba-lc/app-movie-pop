@@ -30,7 +30,7 @@ const HomePage = () => {
 
   const bringMovies = async () => {
     try {
-      const response = await axiosMovieClient.get(search);
+      const response = await axiosMovieClient.get(`/search/shows?q=${search}`);
       if(response.data.length !== 0){
         setMovies(response.data);
       }
