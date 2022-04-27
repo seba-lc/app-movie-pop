@@ -1,4 +1,80 @@
 .landingPage-style{
   min-height: calc(100vh - 60px);
   padding-top: 60px !important;
+  background-color: var(--landing-color);
+}
+
+.img-position{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.loginForm-style{
+  z-index: 1;
+  border: solid black 1px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  width: 350px;
+  height: 450px;
+  opacity: 0;
+  transition: opacity 400ms;
+}
+
+.form-position{
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.create-user-btn{
+  border: solid 1px #F00004;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.bg-black{
+  background-color: black;
+  opacity: 0;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  transition: opacity 600ms;
+}
+
+.bg-black_active{
+  opacity: 0.7;
+}
+
+.spinnerLanding-position{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  opacity: 0;
+  transition: 1000ms;
+}
+
+.form_active{
+  opacity: 1;
+}
+
+.welc-msg{
+  position: absolute;
+  z-index: 10;
+}
+
+.dont_show{
+  display: none;
+}
+
+.show{
+  display: block;
 }

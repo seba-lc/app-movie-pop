@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import UserContext from '../../context/Users/UserContext';
 import './Header.css'
 
 const Header = () => {
   const [errors, setErrors] = useState({});
+  const location = useLocation();
 
   const { auth, getAuth, logout, bringFavoriteMovies, favObjectMovies } = useContext(UserContext);
 
@@ -35,7 +36,7 @@ const Header = () => {
   }, [errors])
 
   return (
-    <div className='bg-secondary header-style d-flex'>
+    <div className={`bg-transparent header-style d-flex ${location.pathname === '/' ? 'invisible' : null}`}>
       <div className='ms-5'>
         <Link to="/">Landing</Link>
       </div>
