@@ -1,18 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosBackendClient } from '../../config/axiosConfig';
+import UserContext from '../../context/Users/UserContext';
 import { validationRegister } from '../../helpers/Validations';
 import './RegisterPage.css';
 
 const RegisterPage = () => {
   const [newUser, setNewUser] = useState({
-    name: '',
+    naim: '',
     user: '',
     pass1: '',
     pass2: ''
   })
   const [errors, setErrors] = useState({});
   const [check, setCheck] = useState(false);
+
+  const {login} = useContext(UserContext);
 
   const handleKeyUp = (e) => {
     setNewUser({
@@ -28,7 +31,7 @@ const RegisterPage = () => {
     setErrors(registerErrors);
     if(Object.keys(registerErrors).length === 0){
       const newUserDB = {
-        name: newUser.name.trim(),
+        name: newUser.naim.trim(),
         user: newUser.user.trim(),
         password: newUser.pass1
       }
@@ -51,17 +54,35 @@ const RegisterPage = () => {
   useEffect(() => {
     if(check){
       setTimeout(() => {
-        alert('Usuario generado exitosamente');
+        const log = window.confirm('Usuario generado exitosamente, desea iniciar sesión?')
+        if(log){
+          const loginErrors = login({
+            user: newUser.user,
+            password: newUser.pass1
+          });
+          if(Object.keys(loginErrors).length !== 0){
+            console.log('Error al iniciar sesión automaticamente');
+            setErrors(loginErrors)
+          }else{
+            console.log('Usuario logeado');
+          }
+        }
         setCheck(false)
       }, 1000)
     }
   }, [check]);
 
+  useEffect(() => {
+    if(Object.keys(errors).length !== 0){
+      console.log(errors);
+    }
+  }, [errors])
+
   return (
     <div className="register-style d-flex flex-column align-items-center justify-content-center">
       <h4>Formulario de Registro</h4>
       <form onSubmit={handleSubmit} className="border border-dark p-5">
-        <input type="text" placeholder="Nombre" name='name' onKeyUp={handleKeyUp} maxLength={50} className="is-valid" />
+        <input type="text" placeholder="Nombre" name='naim' onKeyUp={handleKeyUp} maxLength={50} className="is-valid" />
         <br />
         <input type="text" placeholder="Usuario" name='user' onKeyUp={handleKeyUp} maxLength={50} className="is-valid" />
         <br />

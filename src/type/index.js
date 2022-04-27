@@ -1,3 +1,5 @@
-export const ERROR_USERS = 'ERROR_USERS';
-
-export const ERROR_FAV = 'ERROR_FAV';
+export const GET_USER = 'GET_USER';
+export const REMOVE_USER = 'REMOVE_USER';
+export const SET_AUTH = 'SET_AUTH';
+export const POST_FAV = 'POST_FAV';
+export const POST_FAV_OBJECT = 'POST_FAV_OBJECT';

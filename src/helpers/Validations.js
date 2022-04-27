@@ -2,10 +2,12 @@ export const validationLogin = (values) => {
   let errors = {};
   if (!values.user) {
     errors.user = 'El usuario es obligatorio';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.user)) {
-    errors.user = 'El usuario no es válido';
-  } else if (values.user.length > 30) {
-    errors.user = 'El usuario no debe poseer más de 30 caracteres';
+  } else if (values.user.trim().split(" ").length > 1) {
+    errors.user = 'No estan permitidos los espacios en el usuario';
+  } else if (values.user.trim().length > 20) {
+    errors.user = 'El usuario no debe poseer más de 20 caracteres';
+  } else if (values.user.trim().length < 3) {
+    errors.user = 'El usuario no debe poseer menos de 3 caracteres';
   }
 
   if (!values.password) {
@@ -20,12 +22,12 @@ export const validationLogin = (values) => {
 
 export const validationRegister = (values) => {
   let errors = {};
-  if (!values.name) {
-    errors.name = 'El nombre es obligatorio'
-  } else if (values.name.trim().length > 30){
-    errors.name = 'El nombre no puede poseer más de 30 caracteres'
-  } else if (values.name.trim().length < 3){
-    errors.name = 'El nombre no puede poseer menos de 3 caracteres'
+  if (!values.naim) {
+    errors.naim = 'El nombre es obligatorio'
+  } else if (values.naim.trim().length > 30){
+    errors.naim = 'El nombre no puede poseer más de 30 caracteres'
+  } else if (values.naim.trim().length < 3){
+    errors.naim = 'El nombre no puede poseer menos de 3 caracteres'
   }
 
   if (!values.user) {

@@ -9,14 +9,15 @@ const HomePage = () => {
   const [showMovie, setShowMovie] = useState(false);
   const [showFavorites, setShowFavorites] = useState(false);
   const [movies, setMovies] = useState(null);
-  const [search, setSearch] = useState('star%20wars')
+  const [search, setSearch] = useState('star%20wars');
+  const [movieSelected, setMovieSelected] = useState(null)
 
   const handleClick = (item) => {
     setShowMovie(true);
     const modal = document.getElementById('modal-id');
     modal.classList.add('modal_show');
     document.body.classList.add('modal_overflow');
-    console.log(item.show);
+    setMovieSelected(item.show);
   }
 
   const showFavoritesFunction = () => {
@@ -79,7 +80,7 @@ const HomePage = () => {
         }
         
       </div>
-      <MovieContainer showMovie={showMovie} setShowMovie={setShowMovie} />
+      <MovieContainer showMovie={showMovie} setShowMovie={setShowMovie} movieSelected={movieSelected} setMovieSelected={setMovieSelected} />
     </>
   );
 };
