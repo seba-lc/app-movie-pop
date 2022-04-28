@@ -1,0 +1,26 @@
+.error-page{
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--home-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.error-style{
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  -webkit-box-shadow: 4px 4px 15px 0px rgba(0,0,0,0.63); 
+  box-shadow: 4px 4px 15px 0px rgba(0,0,0,0.63);
+}
+
+@media screen and (max-width: 576px) {
+  .error-style{
+    width: 350px;
+  }
+}
