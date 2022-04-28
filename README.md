@@ -14,3 +14,8 @@ Es por ello que se hace necesario levantar el servidor con el proyecto correspon
 
 Si se trabaja en la rama master, la URL del backend corresponde a un servidor remoto, y por lo 
 tanto no se hace necesario levantar el servidor. 
+
+### `npm install`
+
+Previamente, se debe correr el comando npm install en la consola para instalar las dependencias
+necesarias.
