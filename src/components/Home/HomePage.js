@@ -21,6 +21,7 @@ const HomePage = ({setHideHeader}) => {
     modal.classList.add('modal_show');
     document.body.classList.add('modal_overflow');
     setMovieSelected(item);
+    modal.addEventListener('click', closeModal);
   }
 
   const showFavoritesFunction = () => {
@@ -53,11 +54,20 @@ const HomePage = ({setHideHeader}) => {
     }
   }
 
+  const closeModal = () => {
+    setShowMovie(false);
+    const modal = document.getElementById('modal-id');
+    modal.classList.remove('modal_show');
+    document.body.classList.remove('modal_overflow');
+    modal.removeEventListener('click', closeModal);
+  }
+
   useEffect(() => {
     return () => {
       const modal = document.getElementById('modal-id');
       modal.classList.remove('modal_show');
       document.body.classList.remove('modal_overflow');
+      modal.removeEventListener('click', closeModal)
     }
   }, [])
 

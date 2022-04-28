@@ -49,8 +49,8 @@ const Favorites = ({handleClick}) => {
       {
         auth ? (
           favObjectMovies.length !== 0 ? (
-            favObjectMovies.map((item) => (
-              <div key={item.show.id} className="p-4 m-1 d-flex flex-column align-items-center justify-content-between shadow">
+            favObjectMovies.map((item, index) => (
+              <div key={index} className="p-4 m-1 d-flex flex-column align-items-center justify-content-between shadow">
                 <div className="movie-box d-flex flex-column justify-content-end text-center border border-dark pb-3" style={{backgroundImage: `url(${item.show.image?.medium})`}} onClick={() => handleClick(item)}>
                   {item.show?.image === null ? 'IMAGEN NO DISPONIBLE' : null}
                 </div>
@@ -60,8 +60,8 @@ const Favorites = ({handleClick}) => {
                 </div>
               </div>
             ))
-          ) : <div>No tiene películas favoritas hasta el momento</div>
-        ) : <div>Debe Iniciar Sesión para ver las películas favoritas</div>
+          ) : <div className='text-center w-100 mt-5'>No tiene películas favoritas hasta el momento</div>
+        ) : <div className='text-center w-100 mt-5'>Debe Iniciar Sesión para poder seleccionar películas favoritas</div>
       }
     </div>
   );

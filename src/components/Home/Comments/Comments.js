@@ -1,7 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { axiosBackendClient } from '../../../config/axiosConfig';
 import UserContext from '../../../context/Users/UserContext';
-import './Comments.css'
+import './Comments.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
 
 const Comments = ({movieComments, setMovieComments}) => {
   const {userLogged} = useContext(UserContext);
@@ -29,27 +32,44 @@ const Comments = ({movieComments, setMovieComments}) => {
 
   useEffect(() => {
     if(checkDelete){
-      console.log('Comentario eliminado');
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Comentario Eliminado',
+        showConfirmButton: false,
+        timer: 1500
+      })
       setCheckDelete(false);
     }
   }, [checkDelete])
 
   return (
-    <div className='border border-info comment-box mt-3'>
-      <ul>
+    <div className='mt-3 px-3 w-100'>
         {
           movieComments?.map((item, index) => (
-            <li key={index} className='d-flex justify-content-between border-bottom px-3'>
-              <div>{item.user}: {item.message}</div>
-              {
-                userLogged.user !== item.user ? <div></div> : (
-                  <button onClick={() => handleClick(item._id)}>X</button>
-                )
-              }
-            </li>
+            <div key={index} className='border-bottom'>
+              <span className='border-bottom'>{item.user}:</span>
+              <div className='d-flex align-items-center justify-content-between'>
+                <div className='text-break my-1 me-2'> {item.message}</div>
+                <div className='ps-2'>
+                  {
+                    userLogged.user !== item.user ? <div></div> : (
+                      <div className='border border-danger text-danger px-1 pointer rounded' onClick={() => handleClick(item._id)}><FontAwesomeIcon icon={faTrash} /></div>
+                    )
+                  }
+                </div>
+              </div>
+            </div>
+            // <li key={index} className='d-flex justify-content-between border-bottom px-3'>
+            //   <div className='text-break'>{item.user}: {item.message}</div>
+            //   {
+            //     userLogged.user !== item.user ? <div></div> : (
+            //       <button onClick={() => handleClick(item._id)}>X</button>
+            //     )
+            //   }
+            // </li>
           ))
         }
-      </ul>
     </div>
   );
 };
