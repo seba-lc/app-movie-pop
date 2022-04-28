@@ -54,9 +54,8 @@ const Movie = ({showMovie, setShowMovie, movieSelected}) => {
         setErrors(response[0])
       }else{
         setCheck(true)
-        e.target.reset();
         setComment({
-          ...comment,
+          message: '',
           characters: 200
         })
         const newMovieCommentsArray = movieComments.concat([response[1]]);
