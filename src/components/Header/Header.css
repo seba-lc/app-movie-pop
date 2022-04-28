@@ -5,4 +5,25 @@
   left: 0;
   width: 100vw;
   z-index: 101;
+  background-color: var(--home-color);
+}
+
+.iconSize{
+  transform: scale(1.3);
+}
+
+.hide-header{
+  visibility: hidden;
+}
+
+.logout-style{
+  cursor: pointer;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.border-transparent{
+  border-color: transparent !important;
 }

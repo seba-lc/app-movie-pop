@@ -1,6 +1,14 @@
 .movie-box{
-  height: 150px;
+  height: 210px;
   width: 150px;
-  border: solid black 1px;
   cursor: pointer;
+  background-size: cover;
+  background-position: top;
+  border-radius: 20px;
+  -webkit-box-shadow: 8px 5px 15px -2px rgba(0,0,0,0.63); 
+  box-shadow: 8px 5px 15px -2px rgba(0,0,0,0.63);
+}
+
+.title-style{
+  width: 180px;
 }

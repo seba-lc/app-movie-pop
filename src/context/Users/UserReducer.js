@@ -1,5 +1,5 @@
 import { axiosBackendClient } from "../../config/axiosConfig";
-import { GET_USER, POST_FAV, POST_FAV_OBJECT, REMOVE_USER } from "../../type";
+import { DELETE_FAV, GET_USER, POST_FAV, POST_FAV_OBJECT, REMOVE_USER } from "../../type";
 
 export default (state, action) => {
   switch(action.type){
@@ -36,6 +36,12 @@ export default (state, action) => {
       return {
         ...state,
         favObjectMovies: state.favObjectMovies.concat(action.payload)
+      }
+    case DELETE_FAV:
+      return {
+        ...state,
+        favObjectMovies: state.favObjectMovies.filter(item => item.show.id !== action.payload),
+        favMovies: state.favMovies.filter(item => item !== action.payload.toString())
       }
   }
 }

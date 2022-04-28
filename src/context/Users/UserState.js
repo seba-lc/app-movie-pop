@@ -1,6 +1,6 @@
 import { useReducer } from "react";
 import { axiosBackendClient, axiosMovieClient } from "../../config/axiosConfig";
-import { GET_USER, POST_FAV, POST_FAV_OBJECT, REMOVE_USER } from "../../type";
+import { DELETE_FAV, GET_USER, POST_FAV, POST_FAV_OBJECT, REMOVE_USER } from "../../type";
 import UserContext from "./UserContext";
 import UserReducer from "./UserReducer";
 
@@ -149,6 +149,13 @@ const UserState = ({ children }) => {
     }
   }
 
+  const deleteFav = (movieId) => {
+    dispatch({
+      type: DELETE_FAV,
+      payload: movieId
+    })
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -161,7 +168,8 @@ const UserState = ({ children }) => {
         getAuth,
         postFavMovie,
         postComment,
-        bringFavoriteMovies
+        bringFavoriteMovies,
+        deleteFav
       }}
     >
       {children}

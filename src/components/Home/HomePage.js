@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
+import { Form } from 'react-bootstrap';
 import { axiosMovieClient } from '../../config/axiosConfig';
 import AllMovies from './AllMovies/AllMovies';
 import Favorites from './Favorites/Favorites';
 import './HomePage.css'
 import MovieContainer from './MovieContainer/MovieContainer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar, faClapperboard } from '@fortawesome/free-solid-svg-icons';
 
 const HomePage = () => {
   const [showMovie, setShowMovie] = useState(false);
@@ -41,6 +44,9 @@ const HomePage = () => {
   }
 
   const handleKeyUp = (e) => {
+    if(showFavorites){
+      setShowFavorites(false)
+    }
     setSearch(e.target.value.trim())
     if(e.target.value === ''){
       setSearch('star%20wars')
@@ -66,13 +72,17 @@ const HomePage = () => {
   return (
     <>
       <div className='homePage-style py-5'>
-        <input type="text" placeholder='Buscar: (Ej: Star Wars)' onKeyUp={handleKeyUp} id="search-input" />
-        <br />
-        <button onClick={showFavoritesFunction}>{showFavorites ? 'Todas las películas' : 'Peliculas Favoritas'}</button>
-        <h6>Peliculas / Peliculas favoritas</h6>
-        <br />
-        <span>Utilizar spinners para cargar estas películas</span>
+        <Form.Group controlId='search-input'>
+          <Form.Control className='search-style' type="text" placeholder='Buscar: (Ej: Star Wars)' onKeyUp={handleKeyUp} />
+        </Form.Group>
+        <div className={`border my-3 d-inline-block px-2 py-1 pointer ${showFavorites ? 'text-danger border-danger' : 'text-warning border-warning'}`} onClick={showFavoritesFunction}>
+          {
+            showFavorites ? <span><FontAwesomeIcon icon={faClapperboard} /></span> : <span><FontAwesomeIcon icon={faStar} /></span>
+          }
+          <span className='ps-2'>{showFavorites ? 'Ver Todas las películas' : 'Ver Peliculas Favoritas'}</span>
+        </div>
         <hr />
+        <h4 className='text-center'>{showFavorites ? 'PELICULAS FAVORITAS' : 'RESULTADOS BUSQUEDA'}</h4>
         {
           showFavorites ? <Favorites handleClick={handleClick} movies={movies}/> : (
             <AllMovies handleClick={handleClick} movies={movies}/>

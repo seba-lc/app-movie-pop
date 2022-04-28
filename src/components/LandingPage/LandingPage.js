@@ -69,18 +69,19 @@ const LandingPage = () => {
         setTimeout(() => {
           setSpinnerAnim(true)
           setTimeout(() => {
-            if(auth){
+            if(localStorage.getItem('ok')){
               setLogAnim(1)
               setTimeout(() => {
                 navigate('/home')
+                localStorage.removeItem('ok')
               }, 3000)
             }else{
-              setLogAnim(2)
+              setLogAnim(2);
             }
           }, 3000)
         }, 1000)
       }, 1000)
-    }, 1500)
+    }, 800)
   }, [])
 
   useEffect(() => {
@@ -90,6 +91,14 @@ const LandingPage = () => {
       }, 3000)
     }
   }, [logged])
+
+  useEffect(() => {
+    if(auth){
+      if(!logged){
+        localStorage.setItem('ok', JSON.stringify(true))
+      }
+    }
+  }, [auth])
 
   return (
     <div className="landingPage-style d-flex flex-column align-items-center justify-content-center position-relative">
@@ -109,17 +118,17 @@ const LandingPage = () => {
           {
             Object.keys(errors).length !== 0 ? (
               Object.values(errors).map((error, index) => (
-                <div key={index} className='border border-dark text-center my-1'>{error}</div>
+                <Message key={index} posit="py-1 my-2 border border-danger" variant="danger">{error}</Message>
               ))
             ) : null
           }
           <div className="create-user-btn text-center bg-dark text-light py-2 mt-4" onClick={() => navigate('/register')}>
             Crear Usuario
           </div>
+          {/* <button onClick={prueba}>PRUEBA</button> */}
         </Form>
       </div>
       <br />
-      <button onClick={prueba}>PRUEBA</button>
       <img src={imagen} className="img-position" width={250} alt="popCorn-img" />
       <div className={`spinnerLanding-position ${spinnerAnim ? 'form_active' : null} ${logAnim !== 0 ? 'dont_show' : null} ${logged ? 'show' : null}`}>
         <Spinner />
