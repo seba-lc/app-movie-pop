@@ -9,7 +9,7 @@ import ButtonFav from '../ButtonFav';
 import { Button, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 
-const Movie = ({showMovie, setShowMovie, movieSelected, setMovieSelected}) => {
+const Movie = ({showMovie, setShowMovie, movieSelected}) => {
   const [comment, setComment] = useState({
     message: '',
     characters: 200
@@ -27,7 +27,6 @@ const Movie = ({showMovie, setShowMovie, movieSelected, setMovieSelected}) => {
     modal.classList.remove('modal_show');
     document.body.classList.remove('modal_overflow');
     setMovieComments([]);
-    // setMovieSelected(null);
   }
 
   const handleChange = (e) => {
@@ -134,10 +133,6 @@ const Movie = ({showMovie, setShowMovie, movieSelected, setMovieSelected}) => {
       bringMovieComments();
     }
   }, [showMovie])
-
-  const prueba = () => {
-    console.log(movieSelected)
-  }
 
   useEffect(() => {
     if(movieSelected !== null && movieSelected.show.summary !== null){

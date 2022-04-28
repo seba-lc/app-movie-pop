@@ -104,7 +104,7 @@ const HomePage = ({setHideHeader}) => {
         }
         
       </div>
-      <MovieContainer showMovie={showMovie} setShowMovie={setShowMovie} movieSelected={movieSelected} setMovieSelected={setMovieSelected} />
+      <MovieContainer showMovie={showMovie} setShowMovie={setShowMovie} movieSelected={movieSelected} />
     </>
   );
 };
