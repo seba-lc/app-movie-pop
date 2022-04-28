@@ -3,6 +3,9 @@ import { axiosBackendClient } from '../../../config/axiosConfig';
 import UserContext from '../../../context/Users/UserContext';
 import Comments from '../Comments/Comments';
 import './Movie.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import ButtonFav from '../ButtonFav';
 
 const Movie = ({setShowMovie, movieSelected, setMovieSelected}) => {
   const [comment, setComment] = useState({
@@ -45,7 +48,7 @@ const Movie = ({setShowMovie, movieSelected, setMovieSelected}) => {
         setErrors(errors);
         return;
       }
-      const response = await postComment(movieSelected.id, comment.message); //[errors, CommentDB]
+      const response = await postComment(movieSelected.show.id, comment.message); //[errors, CommentDB]
       if(Object.keys(response[0]).length !== 0){
         setErrors(response[0])
       }else{
@@ -63,7 +66,7 @@ const Movie = ({setShowMovie, movieSelected, setMovieSelected}) => {
 
   const bringMovieComments = async () => {
     try {
-      const response = await axiosBackendClient.get(`/comments/${movieSelected.id}`);
+      const response = await axiosBackendClient.get(`/comments/${movieSelected.show.id}`);
       if(response.status === 200){
         setMovieComments(response.data);
       }
@@ -91,13 +94,28 @@ const Movie = ({setShowMovie, movieSelected, setMovieSelected}) => {
     }
   }, [movieSelected])
 
+  const prueba = () => {
+    console.log(movieSelected)
+  }
+
   return (
-    <div className='movie-style d-flex flex-column align-items-center'>
-      <button onClick={handleClick}>X</button>
-      <span className='border border-info p-4'>pelicula con clasificación de estrellas dentro</span>
-      <span>Titulo</span>
-      <span>Sinopsis</span>
-      <span>Añadir a favoritos</span>
+    movieSelected === null ? null : (
+      <div className='movie-style d-flex flex-column align-items-center text-light pb-5'>
+      {/* <button onClick={prueba}>prueba</button> */}
+      <div onClick={handleClick} className="align-self-start px-4 py-2 pointer">
+        <FontAwesomeIcon icon={faArrowLeft} className="arrowSize" />
+      </div>
+      <div className='p-3'>
+        <div className='movie-box-details d-flex flex-column justify-content-end text-center px-3 pb-3' style={{backgroundImage: `url(${movieSelected.show.image?.medium})`}}>
+          <div>
+            <div>{movieSelected.show?.image === null ? 'IMAGEN NO DISPONIBLE' : null}</div>
+            <div className='rating-style rounded-pill'>{movieSelected.show?.weight/10}/10</div>
+          </div>
+        </div>
+      </div>
+      <ButtonFav data={movieSelected} />
+      <span className='fs-5 text-decoration-underline'>{movieSelected.show.name}</span>
+      <span className='p-3 text-center'>{movieSelected.show.summary}</span>
       <div className='px-2 py-5 border border-light'>
         <form onSubmit={handleSubmit}>
           <input type="text" onKeyUp={handleKeyUp} />
@@ -108,6 +126,7 @@ const Movie = ({setShowMovie, movieSelected, setMovieSelected}) => {
       </div>
       <Comments movieComments={movieComments} setMovieComments={setMovieComments} />
     </div>
+    )
   );
 };
 

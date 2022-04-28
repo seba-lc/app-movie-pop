@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faMagnifyingGlass, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 
-const Header = () => {
+const Header = ({hideHeader}) => {
   const [errors, setErrors] = useState({});
   const location = useLocation();
   const [showHeader, setShowHeader] = useState(false);
@@ -75,7 +75,7 @@ const Header = () => {
   }, [errors])
 
   return (
-    <div className={`header-style d-flex align-items-center ${location.pathname === '/' ? (showHeader ? 'visible bg-transparent' : 'invisible bg-transparent') : null} ${scrollTop ? 'border-bottom border-transparent' : 'border-dark border-bottom'}`}>
+    <div className={`${hideHeader ? 'd-none' : null} header-style d-flex align-items-center ${location.pathname === '/' ? (showHeader ? 'visible bg-transparent' : 'invisible bg-transparent') : null} ${scrollTop ? 'border-bottom border-transparent' : 'border-dark border-bottom'}`}>
       <div className='ms-5'>
         <Link to="/" className={`text-light border rounded-pill py-1 px-2 text-decoration-none pointer ${auth ? 'd-none' : (location.pathname === '/' ? 'd-none' : null)}`}>REGISTRATE</Link>
       </div>

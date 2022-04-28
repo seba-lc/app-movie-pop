@@ -24,10 +24,13 @@ const ButtonFav = ({data}) => {
 
   useEffect(() => {
     if(Object.keys(errors).length !== 0){
+      let errorArr = [];
+      Object.values(errors).forEach(item => errorArr.push(item));
+      const showError = errorArr.join('\n');
       Swal.fire({
         position: 'center',
         icon: 'error',
-        title: errors.user,
+        title: showError,
         showConfirmButton: false,
         timer: 1500
       })
