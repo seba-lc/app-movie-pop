@@ -163,6 +163,15 @@ const Movie = ({showMovie, setShowMovie, movieSelected, setMovieSelected}) => {
     }
   }, [movieSelected])
 
+  useEffect(() => {
+    if(!showMovie){
+      setComment({
+        message: '',
+        characters: 200
+      })
+    }
+  }, [showMovie])
+
   return (
     movieSelected === null ? null : (
       <div className='movie-style d-flex flex-column align-items-center text-light pb-5'>
@@ -183,9 +192,9 @@ const Movie = ({showMovie, setShowMovie, movieSelected, setMovieSelected}) => {
       <div className=' w-100 px-3'>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="w-90">
-            <Form.Control as="textarea" placeholder='Dejá tu comentario' rows={2} onChange={handleChange} />
+            <Form.Control as="textarea" placeholder='Dejá tu comentario' rows={2} onChange={handleChange} value={comment.message} />
           </Form.Group>
-          <span>{comment.characters} carateres restantes</span>
+          <span>{comment.characters}/200</span>
           <Button variant='outline-warning' type='submit' className='w-100 mt-1 py-0'><FontAwesomeIcon icon={faUpload} /></Button>
         </Form>
       </div>

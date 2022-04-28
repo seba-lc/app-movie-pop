@@ -77,7 +77,7 @@ const Header = ({hideHeader}) => {
   return (
     <div className={`${hideHeader ? 'd-none' : null} header-style d-flex align-items-center ${location.pathname === '/' ? (showHeader ? 'visible bg-transparent' : 'invisible bg-transparent') : null} ${scrollTop ? 'border-bottom border-transparent' : 'border-dark border-bottom'}`}>
       <div className='ms-5'>
-        <Link to="/" className={`text-light border rounded-pill py-1 px-2 text-decoration-none pointer ${auth ? 'd-none' : (location.pathname === '/' ? 'd-none' : null)}`}>REGISTRATE</Link>
+        <Link to="/" className={`${location.pathname === '/register' ? 'd-none' : null} text-light border rounded-pill py-1 px-2 text-decoration-none pointer ${auth ? 'd-none' : (location.pathname === '/' ? 'd-none' : null)}`}>REGISTRATE</Link>
       </div>
       <div className='ms-auto me-5'>
         <Link to="/home" className='m-3'><FontAwesomeIcon icon={faHome} className="text-light iconSize" /></Link>

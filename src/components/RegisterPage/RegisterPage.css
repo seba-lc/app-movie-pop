@@ -1,4 +1,13 @@
 .register-style{
   min-height: calc(100vh - 60px);
   padding-top: 60px !important;
+  background-color: var(--home-color);
+}
+
+.register-input-style{
+  width: 330px;
+}
+
+.swal2-popup{
+  max-width: 350px !important;
 }

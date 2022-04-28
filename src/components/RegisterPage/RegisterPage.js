@@ -1,9 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Button, FloatingLabel, Form } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import { axiosBackendClient } from '../../config/axiosConfig';
 import UserContext from '../../context/Users/UserContext';
 import { validationRegister } from '../../helpers/Validations';
+import Message from '../Message/Message';
 import './RegisterPage.css';
+import Swal from 'sweetalert2';
 
 const RegisterPage = () => {
   const [newUser, setNewUser] = useState({
@@ -14,6 +17,7 @@ const RegisterPage = () => {
   })
   const [errors, setErrors] = useState({});
   const [check, setCheck] = useState(false);
+  const navigate = useNavigate();
 
   const {login} = useContext(UserContext);
 
@@ -53,22 +57,42 @@ const RegisterPage = () => {
 
   useEffect(() => {
     if(check){
-      setTimeout(() => {
-        const log = window.confirm('Usuario generado exitosamente, desea iniciar sesión?')
-        if(log){
+      Swal.fire({
+        icon: "success",
+        title: "Usuario generado Exitosamente",
+        html: `<p>• Usuario: ${newUser.user}</p>
+        <p>• Contraseña: ${newUser.pass1}<p> 
+        <p>No olvide la Contraseña que no hay recuperación</p>
+        <p>¿Desea Iniciar Sesión?</p>
+        `,
+        // text: 'hola',
+        showCancelButton: true,
+        confirmButtonColor: "#0B5ED7",
+        confirmButtonText: "SI",
+        cancelButtonText: "NO"
+      }).then((result) => {
+        if(result.isConfirmed){
           const loginErrors = login({
             user: newUser.user,
             password: newUser.pass1
           });
           if(Object.keys(loginErrors).length !== 0){
-            console.log('Error al iniciar sesión automaticamente');
-            setErrors(loginErrors)
+            setErrors('Error al iniciar sesión, inténtelo usted')
           }else{
-            console.log('Usuario logeado');
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Usuario logeado',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            setTimeout(() => {
+              navigate('/');
+            }, 1500)
           }
         }
-        setCheck(false)
-      }, 1000)
+        setCheck(false);
+      })
     }
   }, [check]);
 
@@ -80,27 +104,31 @@ const RegisterPage = () => {
 
   return (
     <div className="register-style d-flex flex-column align-items-center justify-content-center">
-      <h4>Formulario de Registro</h4>
-      <form onSubmit={handleSubmit} className="border border-dark p-5">
-        <input type="text" placeholder="Nombre" name='naim' onKeyUp={handleKeyUp} maxLength={50} className="is-valid" />
-        <br />
-        <input type="text" placeholder="Usuario" name='user' onKeyUp={handleKeyUp} maxLength={50} className="is-valid" />
-        <br />
-        <input type="password" placeholder="Contraseña" name='pass1' onKeyUp={handleKeyUp} maxLength={50} className="is-valid" />
-        <br />
-        <input type="password" placeholder="Repetir contraseña" name='pass2' onKeyUp={handleKeyUp} maxLength={50} className="is-valid" />
-        <br />
-        <button type="submit">Registrarme</button>
-        <br />
+      <Form onSubmit={handleSubmit} className='p-5'>
+        <FloatingLabel className="mb-3" label="Nombre">
+          <Form.Control className="register-input-style" type="text" placeholder="Nombre" onKeyUp={handleKeyUp} name="naim" maxLength={50} />
+        </FloatingLabel>
+        <FloatingLabel className="mb-3" label="Usuario">
+          <Form.Control className="register-input-style" type="text" placeholder="Usuario" onKeyUp={handleKeyUp} name="user" maxLength={50} />
+        </FloatingLabel>
+        <FloatingLabel className="mb-3" label="Contraseña (al menos 8 caracteres)">
+          <Form.Control className="register-input-style" type="password" placeholder="Contraseña (al menos 8 caracteres)" onKeyUp={handleKeyUp} name="pass1" maxLength={50} />
+        </FloatingLabel>
+        <FloatingLabel className="mb-3" label="Repetir Contraseña">
+          <Form.Control className="register-input-style" type="password" placeholder="Repetir Contraseña" onKeyUp={handleKeyUp} name="pass2" maxLength={50} />
+        </FloatingLabel>
+        <Button variant="primary" type="submit" className="mb-3 w-100">
+          Registrarme
+        </Button>
         {
           Object.keys(errors).length !== 0 ? (
             Object.values(errors).map((error, index) => (
-              <div key={index} className='mt-2 border border-dark text-center px-3'>{error}</div>
+              <Message key={index} posit="py-1 my-2 border border-danger" variant="danger">{error}</Message>
             ))
           ) : null
         }
-      </form>
-      <Link to="/">Volver al inicio</Link>
+      </Form>
+      <Link to="/" className='text-light'>Volver al inicio</Link>
     </div>
   );
 };
