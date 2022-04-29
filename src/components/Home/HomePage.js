@@ -87,7 +87,7 @@ const HomePage = ({setHideHeader}) => {
     <>
       <div className='homePage-style py-5'>
         <Form.Group controlId='search-input'>
-          <Form.Control className='search-style' type="text" placeholder='Buscar: (Ej: Star Wars)' onKeyUp={handleKeyUp} />
+          <Form.Control className='search-style' type="text" placeholder='Buscar: (Ej: Star Wars)' onKeyUp={handleKeyUp} autoComplete="off" />
         </Form.Group>
         <div className={`border my-3 d-inline-block px-2 py-1 pointer ${showFavorites ? 'text-danger border-danger' : 'text-warning border-warning'}`} onClick={showFavoritesFunction}>
           {

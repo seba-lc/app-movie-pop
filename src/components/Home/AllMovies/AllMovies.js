@@ -3,7 +3,7 @@ import './AllMovies.css';
 
 const AllMovies = ({handleClick, movies}) => {
   return (
-    <div className='d-flex flex-wrap justify-content-center'>
+    <div className='d-flex flex-wrap movie-ubication'>
       {
         movies?.map(item => (
           <div key={item.show.id} className="p-4 m-1 d-flex flex-column align-items-center justify-content-between shadow">

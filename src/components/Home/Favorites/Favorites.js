@@ -45,7 +45,7 @@ const Favorites = ({handleClick}) => {
   }, [errors])
 
   return (
-    <div className='d-flex flex-wrap justify-content-center'>
+    <div className='d-flex flex-wrap movie-ubication'>
       {
         auth ? (
           favObjectMovies.length !== 0 ? (
