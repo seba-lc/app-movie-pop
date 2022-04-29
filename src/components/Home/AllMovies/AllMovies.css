@@ -12,3 +12,18 @@
 .title-style{
   width: 180px;
 }
+
+.movie-ubication{
+  justify-content: start;
+}
+
+@media screen and (max-width: 768px) {
+  .movie-ubication{
+    justify-content: center;
+  }
+
+  .movie-box{
+    width: 200px;
+    height: 280px;
+  }
+}
